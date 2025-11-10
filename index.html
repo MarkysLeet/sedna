@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Генератор скрипта отзыва</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 24px;
+      line-height: 1.5;
+    }
+
+    label {
+      display: block;
+      margin-top: 16px;
+      font-weight: 600;
+    }
+
+    textarea {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 8px;
+      font-family: "Courier New", monospace;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    #categories {
+      min-height: 360px;
+    }
+
+    #output {
+      min-height: 280px;
+      margin-top: 16px;
+    }
+
+    #generated-review {
+      min-height: 120px;
+      margin-top: 12px;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 18px;
+      font-size: 15px;
+      border: none;
+      border-radius: 4px;
+      background-color: #1976d2;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #135da6;
+    }
+
+    .note {
+      margin-top: 12px;
+      font-size: 13px;
+      color: #444;
+    }
+  </style>
+</head>
+<body>
+  <h1>Генератор скрипта отзыва</h1>
+
+  <label for="positive-text">Что должно быть в отзыве (акцент):</label>
+  <textarea id="positive-text" placeholder="Например: гость очень доволен аквапарком и основным рестораном"></textarea>
+
+  <label for="categories">Категории (по одной в строке):</label>
+  <textarea id="categories">
+KLIMA SOGUTMUYOR/ISITMIYOR-TEKNIK SERVIS BILDIRIMLERI
+ODA GIDER KOKUSU-TEKNIK SERVIS BILDIRIMLERI
+TEKNIK ARIZLARIN GIDERILME SURESI-TEKNIK SERVIS BILDIRIMLERI
+TEKNIK PERSONEL YAKLASIMI-TEKNIK SERVIS BILDIRIMLERI
+GIRISTE ODA ARIZALARI-TEKNIK SERVIS BILDIRIMLERI
+TV KANALLARI-TEKNIK SERVIS BILDIRIMLERI
+SPOR AKTIVITE-GENEL BILDIRIMLER
+GENEL MUZIK YAYINI-MUZIK BILDIRIMLERI
+SINEMA-GENEL BILDIRIMLER
+DISARIDAN ALINAN CANLI SHOWLAR-EGLENCE AKTIVITE BILDIRIMLERI
+ANIMASYON PERSONEL YAKLASIMI-GENEL BILDIRIMLER
+CANLI MUZIK-MUZIK BILDIRIMLERI
+AKSAM AKTIVITELERI-EGLENCE AKTIVITE BILDIRIMLERI
+ACIK DISKO-GENEL BILDIRIMLER
+ANFI TIYATRO YER-GENEL BILDIRIMLER
+DISKO MALZEME-GENEL BILDIRIMLER
+DISKO SAATLERI-GENEL BILDIRIMLER
+FITNESS (MALZEME)-GENEL BILDIRIMLER
+GUVENLIK KAPI KARSILAMA-GUVENLIK BILDIRIMLERI
+CANKURTARAN-GUVENLIK BILDIRIMLERI
+GUVENLIK PERSONELI-GUVENLIK BILDIRIMLERI
+YAN ODA GURULTU-GURULTU
+KAYIP-BULUNMUS ESYA SIKAYETLERI-KONSEPT BILDIRIMLERI
+GUVENLIK SORUN COZME-GUVENLIK BILDIRIMLERI
+AQUAPARK ALANI TEMIZLIGI-GENEL ALAN BILDIRIMLERI
+HAVLU-EKSIK BIRAKILAN MALZEME
+BORNOZ-EKSIK BIRAKILAN MALZEME
+TERLIK-EKSIK BIRAKILAN MALZEME
+YASTIK-EKSIK BIRAKILAN MALZEME
+LOSYON-EKSIK BIRAKILAN MALZEME
+CARSAF TEMIZLIGI-LINEN/TEKSTIL TEMIZLIGI
+HALI TEMIZLIGI-LINEN/TEKSTIL TEMIZLIGI
+ODA KOKUSU-ODA BILDIRIMLERI
+BUKLET MALZEMELERI-EKSIK BIRAKILAN MALZEME
+ZEMIN TEMIZLIGI-ODA BILDIRIMLERI
+HAVUZ CEVRESI TEMIZLIGI VE DUZENI-GENEL ALAN BILDIRIMLERI
+EK YATAK OLMAMASI-ODA BILDIRIMLERI
+FAMILY CLUB HK PERSONEL-PERSONEL BILDIRIMLERI
+ODA TEMIZLIGI-ODA BILDIRIMLERI
+RESTORAN ALANI TEMIZLIGI-GENEL ALAN BILDIRIMLERI
+BANYO TEMIZLIGI-ODA BILDIRIMLERI
+YATAK KALITESI-ODA BILDIRIMLERI
+GENCLIK KULUBU 13-17 YAS-MINI KULUP BILDIRIMLERI
+COCUK AKTIVITE CESITLILIK-MINI KULUP BILDIRIMLERI
+MINI KULUP VE BAKIM HIZMETLERI-MINI KULUP BILDIRIMLERI
+MINI KULUP PERSONEL YAKLASIMI-MINI KULUP BILDIRIMLERI
+YABANCI DIL YETERLILIGI-MINI KULUP BILDIRIMLERI
+MINI DISKO-MINI KULUP BILDIRIMLERI
+ASISTANLIK HIZMETI-MISAFIR ILISKILERI BILDIRIMLERI
+CHECK OUT ISLEMLERI-ONBURO BILDIRIMLERI
+RESEPSIYON HIZMET HIZI VE GULERYUZ-ONBURO BILDIRIMLERI
+BELLBOY HIZMETI-ONBURO BILDIRIMLERI
+ANAHTAR - KAPIYI ACMAMASI-ONBURO BILDIRIMLERI
+ERKEN GIRIS/GEC CIKIS -ONBURO BILDIRIMLERI
+ICECEK ZEHIRLENMESI-YIYECEK ICECEK DIGER
+FAMILY CLUB HAVUZ BAR SERVIS KALITESI-BAR HIZMET KALITESI
+FAMILY RESTORAN SERVIS KALITESI-RESTORAN HIZMET KALITESI
+7/24 BAR PERSONEL YAKLASIMI-PERSONEL BILDIRIMLERI
+DONDURMA EVI SERVIS KALITESI-RESTORAN HIZMET KALITESI
+DISKO BAR SERVIS KALITESI-BAR HIZMET KALITESI
+FB GENEL PERSONEL YAKLASIMI-PERSONEL BILDIRIMLERI
+SERVIS HIJYEN-GENEL BILDIRIMLER
+RESTORAN MASA SUSLEME HIZMETI-GENEL BILDIRIMLER
+LUBNAN RESTORAN SERVIS KALITESI-RESTORAN HIZMET KALITESI
+LUBNAN RESTORAN PERSONEL YAKLASIMI-PERSONEL BILDIRIMLERI
+PASTANE SERVIS KALITESI-RESTORAN HIZMET KALITESI
+DONDURMA EVI PERSONEL YAKLASIMI-PERSONEL BILDIRIMLERI
+POOL SNACK RESTORAN PERSONEL YAKLASIMI-PERSONEL BILDIRIMLERI
+ARENA POOL BAR PERSONEL YAKLASIMI-PERSONEL BILDIRIMLERI
+BALIK RESTORAN SERVIS KALITESI-RESTORAN HIZMET KALITESI
+RED BAR SERVIS KALITESI-BAR HIZMET KALITESI
+GENEL BAR SERVIS KALITESI-BAR HIZMET KALITESI
+STEAKHOUSE SERVIS KALITESI-RESTORAN HIZMET KALITESI
+ICECEK CESITLILIGI-ICECEK BILDIRIMLERI
+7/24 RESTORAN PERSONEL YAKLASIMI-PERSONEL BILDIRIMLERI
+GOZLEME KOSESI SERVIS KALITESI-RESTORAN HIZMET KALITESI
+ARENA POOL BAR SERVIS KALITESI-BAR HIZMET KALITESI
+WASABI RESTORAN PERSONEL YAKLASIMI-PERSONEL BILDIRIMLERI
+ANA RESTORAN PERSONEL YAKLASIMI-PERSONEL BILDIRIMLERI
+CATAL-BICAK-TABAK-KASIK-BARDAK TEMIZLIGI-GENEL BILDIRIMLER
+STEAK HOUSE RESTORAN PERSONEL YAKLASIMI-PERSONEL BILDIRIMLERI
+SMOOTHIE BAR SERVIS KALITESI-BAR HIZMET KALITESI
+RED BAR PERSONEL YAKLASIMI-PERSONEL BILDIRIMLERI
+GENEL RESTORAN SERVIS KALITESI-RESTORAN HIZMET KALITESI
+ANA RESTORAN SERVIS KALITESI-RESTORAN HIZMET KALITESI
+ITALYAN RESTORAN PERSONEL YAKLASIMI-PERSONEL BILDIRIMLERI
+ICECEK KALITESI-ICECEK BILDIRIMLERI
+BALIK RESTORAN PERSONEL YAKLASIMI-PERSONEL BILDIRIMLERI
+WASABI RESTORAN SERVIS KALITESI-RESTORAN HIZMET KALITESI
+FB PERSONEL SAYISI-PERSONEL BILDIRIMLERI
+LUNAPARK ALANI-GENEL ALAN BILDIRIMLERI
+DENIZLE ILGILI KONULAR-GENEL ALAN BILDIRIMLERI
+ACENTE SIKAYETLERI-DIS FIRMA BILDIRIMLERI
+TADILAT/ INSAAT GURULTU-GURULTU
+GENEL PERSONEL YAKLASIMI-PERSONEL BILDIRIMLERI
+AQUAPARK CALISMA SAATLERI-KONSEPT BILDIRIMLERI
+FUTBOL SAHASI-GENEL ALAN BILDIRIMLERI
+GENEL MEMNUNIYET-MEMNUNIYET BILDIRIMLERI
+BILGILENDIRME PANOLARI-GENEL ALAN BILDIRIMLERI
+FAMILY CLUB KONSEPT-KONSEPT BILDIRIMLERI
+SAGLIK VE GUVENLIK-SAGLIK VE GUVENLIK BILDIRIMLERI
+DUKKAN-DIS FIRMA BILDIRIMLERI
+AQUAPARK KONUM/ALAN-GENEL ALAN BILDIRIMLERI
+MARKET-DIS FIRMA BILDIRIMLERI
+KIS BAHCESI BILDIRIMLERI-GENEL ALAN BILDIRIMLERI
+ODA KONUMU-ODA BILDIRIMLERI
+VOLEYBOL SAHASI-GENEL ALAN BILDIRIMLERI
+OTEL HIZMET KALITESI-MEMNUNIYET BILDIRIMLERI
+FOTOGRAFCI-DIS FIRMA BILDIRIMLERI
+KONSEPT-KONSEPT BILDIRIMLERI
+THE LAND OF LEGEND HIZMETI-KONSEPT BILDIRIMLERI
+BUGGY YETERSIZLIGI-KAPASITE BILDIRIMLERI
+HAVUZ ALANI KAPASITESI-KAPASITE BILDIRIMLERI
+NARGILE HIZMETI-DIS FIRMA BILDIRIMLERI
+ANA RESTORAN KAPASITE YETERSIZ-KAPASITE BILDIRIMLERI
+YAN OTEL GURULTU-GURULTU
+ODA RUTUBET KOKUSU-ODA BILDIRIMLERI
+SPA TEMIZLIK/HIJYEN-DIS FIRMA BILDIRIMLERI
+SPA REZERVASYONU-DIS FIRMA BILDIRIMLERI
+HAMAM/SAUNA HIZMETI-DIS FIRMA BILDIRIMLERI
+ANA RESTORAN YEMEK CESITLILIGI-YEMEK CESITLILIGI
+TURK RESTORAN YEMEK KALITESI-YEMEK KALITESI
+FAMILY RESTORAN YEMEK KALITESI-YEMEK KALITESI
+GOZLEME KOSESI YEMEK SUNUMU-YEMEK SUNUMU
+PASTANE URUN SUNUMU-YEMEK SUNUMU
+PASTANE URUN KALITESI-YEMEK KALITESI
+GOZLEME KOSESI YEMEK LEZZETI-YEMEK LEZZETI
+COCUK BUFESI-OZELLIKLI YEMEK HIZMETI
+TURK RESTORAN YEMEK CESITLILIGI-YEMEK CESITLILIGI
+PASTANE URUN LEZZETI-YEMEK LEZZETI
+STEAKHOUSE RESTORAN YEMEK LEZZETI-YEMEK LEZZETI
+WASABI RESTORAN YEMEK LEZZETI-YEMEK LEZZETI
+PASTANE URUN CESITLILIGI-YEMEK CESITLILIGI
+GENEL YEMEK SUNUMU-YEMEK SUNUMU
+ITALYAN RESTORAN YEMEK CESITLILIGI-YEMEK CESITLILIGI
+ANA RESTORAN YEMEK SUNUMU-YEMEK SUNUMU
+BALIK RESTORAN YEMEK SUNUMU-YEMEK SUNUMU
+GIDA ZEHIRLENMESI-MUTFAK DIGER
+STEAKHOUSE YEMEK CESITLILIGI-YEMEK CESITLILIGI
+YEMEKLER SOGUK SIKAYETI-GENEL BILDIRIMLER
+BALIK RESTORAN YEMEK CESITLILIGI-YEMEK CESITLILIGI
+WASABI RESTORAN YEMEK KALITESI-YEMEK KALITESI
+ANA RESTORAN YEMEK LEZZETI-YEMEK LEZZETI
+WASABI RESTORAN YEMEK CESITLILIGI-YEMEK CESITLILIGI
+GENEL YEMEK KALITESI-YEMEK KALITESI
+DIYET BUFE HIZMETI-OZELLIKLI YEMEK HIZMETI
+POOL SNACK RESTORAN YEMEK CESITLILIGI-YEMEK CESITLILIGI
+GENEL YEMEK CESITLILIGI-YEMEK CESITLILIGI
+7/24 RESTORAN YEMEK SUNUMU-YEMEK SUNUMU
+GOZLEME KOSESI YEMEK KALITESI-YEMEK KALITESI
+MUTFAK PERSONEL YAKLASIMI-PERSONEL BILDIRIMLERI
+MEYVE CESITLILIGI-YEMEK CESITLILIGI
+TURK RESTORAN YEMEK SUNUMU-YEMEK SUNUMU
+LUBNAN RESTORAN YEMEK CESITLILIGI-YEMEK CESITLILIGI
+LUBNAN RESTORAN YEMEK KALITESI-YEMEK KALITESI
+LUBNAN RESTORAN YEMEK SUNUMU-YEMEK SUNUMU
+LUBNAN RESTORAN YEMEK LEZZETI-YEMEK LEZZETI
+</textarea>
+
+  <button id="generate">Сгенерировать скрипт</button>
+
+  <label for="generated-review">Сгенерированный отзыв (турецкий, нормализованный):</label>
+  <textarea id="generated-review" readonly></textarea>
+
+  <p id="selected-categories-info" class="note"></p>
+
+  <label for="output">Готовый скрипт для вставки в консоль:</label>
+  <textarea id="output" readonly></textarea>
+
+  <script>
+    function normalize(str) {
+      return (str || '')
+        .replace(/\s+/g, ' ')
+        .trim()
+        .toUpperCase()
+        .replace(/İ/g, 'I')
+        .replace(/İ/g, 'I')
+        .replace(/Ş/g, 'S')
+        .replace(/Ğ/g, 'G')
+        .replace(/Ü/g, 'U')
+        .replace(/Ö/g, 'O')
+        .replace(/Ç/g, 'C');
+    }
+
+    function escapeForSingleQuote(value) {
+      return value
+        .replace(/\\/g, '\\\\')
+        .replace(/'/g, "\\'");
+    }
+
+    const topicRules = [
+      {
+        name: 'generalPositive',
+        keywords: [
+          /доволен/i,
+          /довольн/i,
+          /понрав/i,
+          /любим/i,
+          /супер/i,
+          /прекрас/i,
+          /отлич/i,
+          /шикар/i,
+          /восторг/i,
+          /рекоменду/i,
+          /приятн/i,
+          /рад/i
+        ],
+        sentences: [
+          'Misafir tatilinden cok memnun kaldı.',
+          'Pozitif deneyimini ictenlikle tavsiye ediyor.'
+        ],
+        categories: [
+          'GENEL MEMNUNIYET-MEMNUNIYET BILDIRIMLERI',
+          'OTEL HIZMET KALITESI-MEMNUNIYET BILDIRIMLERI'
+        ]
+      },
+      {
+        keywords: [/аквапарк/i, /водн/i, /горк/i],
+        sentences: [
+          'Misafir aquapark alanindaki kaydiraklarin eglenceli oldugunu belirtti.'
+        ],
+        categories: [
+          'AQUAPARK KONUM/ALAN-GENEL ALAN BILDIRIMLERI',
+          'AQUAPARK ALANI TEMIZLIGI-GENEL ALAN BILDIRIMLERI'
+        ]
+      },
+      {
+        keywords: [/основн[^.?!]*ресторан/i, /главн[^.?!]*ресторан/i, /шведск[^.?!]*стол/i],
+        sentences: [
+          'Misafir ana restoranda sunulan yemeklerin lezzetini ve cesitliligini cok begendi.'
+        ],
+        categories: [
+          'ANA RESTORAN YEMEK LEZZETI-YEMEK LEZZETI',
+          'ANA RESTORAN YEMEK CESITLILIGI-YEMEK CESITLILIGI',
+          'ANA RESTORAN SERVIS KALITESI-RESTORAN HIZMET KALITESI',
+          'ANA RESTORAN PERSONEL YAKLASIMI-PERSONEL BILDIRIMLERI',
+          'ANA RESTORAN YEMEK SUNUMU-YEMEK SUNUMU'
+        ]
+      },
+      {
+        keywords: [/ресторан/i, /питани/i, /столов/i],
+        sentences: [
+          'Misafir restoran hizmetlerinin duzenini ve hijyenini takdir etti.'
+        ],
+        categories: [
+          'GENEL RESTORAN SERVIS KALITESI-RESTORAN HIZMET KALITESI',
+          'GENEL YEMEK KALITESI-YEMEK KALITESI',
+          'GENEL YEMEK CESITLILIGI-YEMEK CESITLILIGI',
+          'GENEL YEMEK SUNUMU-YEMEK SUNUMU',
+          'RESTORAN ALANI TEMIZLIGI-GENEL ALAN BILDIRIMLERI',
+          'SERVIS HIJYEN-GENEL BILDIRIMLER'
+        ]
+      },
+      {
+        keywords: [/десерт/i, /сладост/i, /пирож/i, /паста/i, /морожен/i],
+        sentences: [
+          'Misafir pastane ve tatli seceneklerinin lezzetini ovdu.'
+        ],
+        categories: [
+          'PASTANE URUN LEZZETI-YEMEK LEZZETI',
+          'PASTANE URUN CESITLILIGI-YEMEK CESITLILIGI',
+          'PASTANE URUN SUNUMU-YEMEK SUNUMU',
+          'PASTANE SERVIS KALITESI-RESTORAN HIZMET KALITESI',
+          'DONDURMA EVI SERVIS KALITESI-RESTORAN HIZMET KALITESI',
+          'DONDURMA EVI PERSONEL YAKLASIMI-PERSONEL BILDIRIMLERI'
+        ]
+      },
+      {
+        keywords: [/бар/i, /коктей/i, /напит/i, /бармен/i],
+        sentences: [
+          'Misafir bar servisindeki hizli ve guler yuzlu yaklasimi begendi.'
+        ],
+        categories: [
+          'GENEL BAR SERVIS KALITESI-BAR HIZMET KALITESI',
+          'ICECEK CESITLILIGI-ICECEK BILDIRIMLERI',
+          '7/24 BAR PERSONEL YAKLASIMI-PERSONEL BILDIRIMLERI'
+        ]
+      },
+      {
+        keywords: [/персонал/i, /сотрудник/i, /staff/i, /команда/i, /гид/i],
+        sentences: [
+          'Misafir personelin ilgisi ve guler yuzlu hizmetinden memnun kaldı.'
+        ],
+        categories: [
+          'GENEL PERSONEL YAKLASIMI-PERSONEL BILDIRIMLERI',
+          'FB GENEL PERSONEL YAKLASIMI-PERSONEL BILDIRIMLERI'
+        ]
+      },
+      {
+        keywords: [/номер/i, /комнат/i, /room/i, /suite/i],
+        sentences: [
+          'Misafir odanin konforu ve temizliginden memnun kaldı.'
+        ],
+        categories: [
+          'ODA TEMIZLIGI-ODA BILDIRIMLERI',
+          'YATAK KALITESI-ODA BILDIRIMLERI'
+        ]
+      },
+      {
+        keywords: [/уборк/i, /чист/i, /гигиен/i],
+        sentences: [
+          'Misafir tesisin genel temizliginin ust duzey oldugunu ifade etti.'
+        ],
+        categories: [
+          'RESTORAN ALANI TEMIZLIGI-GENEL ALAN BILDIRIMLERI',
+          'HAVUZ CEVRESI TEMIZLIGI VE DUZENI-GENEL ALAN BILDIRIMLERI',
+          'AQUAPARK ALANI TEMIZLIGI-GENEL ALAN BILDIRIMLERI',
+          'SERVIS HIJYEN-GENEL BILDIRIMLER'
+        ]
+      },
+      {
+        keywords: [/детск/i, /ребен/i, /сын/i, /доч/i, /kids/i, /семейн/i],
+        sentences: [
+          'Misafir cocuklara yonelik hizmetlerin eglenceli ve guvenli oldugunu soyledi.'
+        ],
+        categories: [
+          'COCUK AKTIVITE CESITLILIK-MINI KULUP BILDIRIMLERI',
+          'MINI KULUP PERSONEL YAKLASIMI-MINI KULUP BILDIRIMLERI',
+          'MINI KULUP VE BAKIM HIZMETLERI-MINI KULUP BILDIRIMLERI',
+          'MINI DISKO-MINI KULUP BILDIRIMLERI',
+          'GENCLIK KULUBU 13-17 YAS-MINI KULUP BILDIRIMLERI',
+          'FAMILY CLUB KONSEPT-KONSEPT BILDIRIMLERI'
+        ]
+      },
+      {
+        keywords: [/развлеч/i, /анимац/i, /шоу/i, /концерт/i, /музык/i, /дискотек/i],
+        sentences: [
+          'Misafir animasyon ve eglence programlarinin enerjisinden etkilendi.'
+        ],
+        categories: [
+          'ANIMASYON PERSONEL YAKLASIMI-GENEL BILDIRIMLER',
+          'AKSAM AKTIVITELERI-EGLENCE AKTIVITE BILDIRIMLERI',
+          'CANLI MUZIK-MUZIK BILDIRIMLERI',
+          'DISARIDAN ALINAN CANLI SHOWLAR-EGLENCE AKTIVITE BILDIRIMLERI',
+          'ACIK DISKO-GENEL BILDIRIMLER',
+          'SINEMA-GENEL BILDIRIMLER'
+        ]
+      },
+      {
+        keywords: [/спа/i, /хамам/i, /саун/i, /массаж/i, /wellness/i],
+        sentences: [
+          'Misafir spa ve wellness hizmetlerini tavsiye etti.'
+        ],
+        categories: [
+          'SPA TEMIZLIK/HIJYEN-DIS FIRMA BILDIRIMLERI',
+          'HAMAM/SAUNA HIZMETI-DIS FIRMA BILDIRIMLERI',
+          'SPA REZERVASYONU-DIS FIRMA BILDIRIMLERI'
+        ]
+      },
+      {
+        keywords: [/пляж/i, /мор/i, /sea/i],
+        sentences: [
+          'Misafir deniz ve plaj imkanlarini begendi.'
+        ],
+        categories: [
+          'DENIZLE ILGILI KONULAR-GENEL ALAN BILDIRIMLERI'
+        ]
+      },
+      {
+        keywords: [/бассеин/i, /бассейн/i, /pool/i, /аква/i],
+        sentences: [
+          'Misafir havuz alaninin duzenini ve atmosferini ovdu.'
+        ],
+        categories: [
+          'HAVUZ CEVRESI TEMIZLIGI VE DUZENI-GENEL ALAN BILDIRIMLERI'
+        ]
+      },
+      {
+        keywords: [/ресепш/i, /рецепц/i, /check[- ]?in/i, /check[- ]?out/i, /выезд/i, /въезд/i, /заселен/i],
+        sentences: [
+          'Misafir resepsiyon ve giris-cikis sureclerinin duzenli ilerledigini paylasti.'
+        ],
+        categories: [
+          'RESEPSIYON HIZMET HIZI VE GULERYUZ-ONBURO BILDIRIMLERI',
+          'CHECK OUT ISLEMLERI-ONBURO BILDIRIMLERI',
+          'ERKEN GIRIS/GEC CIKIS -ONBURO BILDIRIMLERI',
+          'BELLBOY HIZMETI-ONBURO BILDIRIMLERI'
+        ]
+      },
+      {
+        keywords: [/гест/i, /guest relation/i, /relation/i, /ассист/i, /помощ/i],
+        sentences: [
+          'Misafir misafir iliskileri ekibinin destekleyici yaklasimindan memnun kaldı.'
+        ],
+        categories: [
+          'ASISTANLIK HIZMETI-MISAFIR ILISKILERI BILDIRIMLERI',
+          'FAMILY CLUB HK PERSONEL-PERSONEL BILDIRIMLERI'
+        ]
+      },
+      {
+        keywords: [/маркет/i, /магазин/i, /шоп/i, /market/i],
+        sentences: [
+          'Misafir tesis icindeki dukkan ve alisveris olanaklarini faydali buldu.'
+        ],
+        categories: [
+          'DUKKAN-DIS FIRMA BILDIRIMLERI',
+          'MARKET-DIS FIRMA BILDIRIMLERI'
+        ]
+      },
+      {
+        keywords: [/спорт/i, /фитнес/i, /gym/i],
+        sentences: [
+          'Misafir spor ve fitness imkanlarinin yeterli oldugunu belirtti.'
+        ],
+        categories: [
+          'FITNESS (MALZEME)-GENEL BILDIRIMLER',
+          'SPOR AKTIVITE-GENEL BILDIRIMLER'
+        ]
+      },
+      {
+        keywords: [/экскурс/i, /легенд/i, /legend/i],
+        sentences: [
+          'Misafir The Land of Legend hizmetlerinden memnun kaldı.'
+        ],
+        categories: [
+          'THE LAND OF LEGEND HIZMETI-KONSEPT BILDIRIMLERI'
+        ]
+      }
+    ];
+
+    function analyzeInput(message, categories) {
+      const lowerMessage = (message || '').toLocaleLowerCase('tr-TR');
+      const availableSet = new Set(categories);
+      const normalizedCategories = categories.map(cat => ({ raw: cat, norm: normalize(cat) }));
+
+      const selectedCategories = new Set();
+      const reviewParts = [];
+
+      topicRules.forEach(rule => {
+        const matched = rule.keywords.some(pattern => pattern.test(lowerMessage));
+        if (!matched) {
+          return;
+        }
+
+        if (rule.sentences) {
+          rule.sentences.forEach(sentence => {
+            if (!reviewParts.includes(sentence)) {
+              reviewParts.push(sentence);
+            }
+          });
+        }
+
+        if (rule.categories) {
+          rule.categories.forEach(cat => {
+            if (availableSet.has(cat)) {
+              selectedCategories.add(cat);
+            }
+          });
+        }
+
+        if (rule.includes) {
+          const includeTerms = Array.isArray(rule.includes) ? rule.includes : [rule.includes];
+          includeTerms.forEach(term => {
+            const normalizedTerm = normalize(term);
+            normalizedCategories.forEach(item => {
+              if (item.norm.includes(normalizedTerm)) {
+                selectedCategories.add(item.raw);
+              }
+            });
+          });
+        }
+      });
+
+      if (reviewParts.length === 0) {
+        reviewParts.push('Misafir tatil deneyimini olumlu sekilde paylasti.');
+      }
+
+      const reviewText = reviewParts.join(' ');
+
+      const orderedCategories = categories.filter(cat => selectedCategories.has(cat));
+
+      return {
+        reviewText,
+        categories: orderedCategories
+      };
+    }
+
+    document.getElementById('generate').addEventListener('click', function () {
+      const positiveInput = document.getElementById('positive-text').value;
+      const categoriesInput = document.getElementById('categories').value;
+
+      const categories = categoriesInput
+        .split(/\r?\n/)
+        .map(line => line.trim())
+        .filter(line => line.length > 0);
+
+      const analysis = analyzeInput(positiveInput, categories);
+      const autoCategories = analysis.categories;
+      const reviewText = analysis.reviewText;
+
+      const normalizedReview = normalize(reviewText);
+      const escapedReview = escapeForSingleQuote(normalizedReview);
+
+      const escapedCategories = autoCategories.map(cat => "    '" + escapeForSingleQuote(cat) + "'");
+      const categoriesBlock = escapedCategories.length
+        ? '\n' + escapedCategories.join(',\n') + '\n  '
+        : '\n  ';
+
+      const finalScript = `(async function () {\n  const targetTexts = [${categoriesBlock}];\n\n  const positiveText = '${escapedReview}';\n\n  const searchInput =\n    document.querySelector('#input_3723[ng-model="searchTerm"]') ||\n    document.querySelector('input#input_3723') ||\n    document.querySelector('input[ng-model="searchTerm"]');\n\n  if (!searchInput) {\n    console.warn('поисковое поле не найдено');\n    return;\n  }\n\n  function normalize(str) {\n    return (str || '')\n      .replace(/\\s+/g, ' ')\n      .trim()\n      .toUpperCase()\n      .replace(/İ/g, 'I')\n      .replace(/İ/g, 'I')\n      .replace(/Ş/g, 'S')\n      .replace(/Ğ/g, 'G')\n      .replace(/Ü/g, 'U')\n      .replace(/Ö/g, 'O')\n      .replace(/Ç/g, 'C');\n  }\n\n  function realClick(el) {\n    ['mouseover', 'mousedown', 'mouseup', 'click'].forEach(type => {\n      el.dispatchEvent(new MouseEvent(type, {\n        view: window,\n        bubbles: true,\n        cancelable: true\n      }));\n    });\n  }\n\n  function setSearch(val) {\n    searchInput.value = val;\n    searchInput.dispatchEvent(new Event('input', { bubbles: true }));\n    searchInput.dispatchEvent(new Event('change', { bubbles: true }));\n  }\n\n  for (const cat of targetTexts) {\n    // в поисковую строку пишем только часть ДО тире\n    const searchPart = cat.split('-')[0].trim();\n    const normTargetPrefix = normalize(searchPart);\n\n    setSearch(searchPart);\n    await new Promise(r => setTimeout(r, 300));\n\n    const items = document.querySelectorAll('.vs-repeat-repeated-element');\n    let clicked = false;\n\n    items.forEach(item => {\n      if (clicked) return;\n      const raw = (item.textContent || '').trim();\n      const norm = normalize(raw);\n\n      if (norm.startsWith(normTargetPrefix)) {\n        const box =\n          item.querySelector('md-checkbox .md-container') ||\n          item.querySelector('md-checkbox') ||\n          item.querySelector('.md-container');\n\n        if (box) {\n          realClick(box);\n          console.log('✅ выбрал:', raw);\n          clicked = true;\n        }\n      }\n    });\n\n    if (!clicked) {\n      console.warn('⚠️ не нашёл по префиксу:', searchPart);\n    }\n\n    setSearch('');\n    await new Promise(r => setTimeout(r, 150));\n  }\n\n  const ta = document.querySelector('textarea[ng-model="SurveyComment.PositiveComments"]');\n  if (ta) {\n    ta.value = positiveText;\n    ta.dispatchEvent(new Event('input', { bubbles: true }));\n    ta.dispatchEvent(new Event('change', { bubbles: true }));\n    console.log('📝 позитивный отзыв проставлен');\n  } else {\n    console.warn('textarea с ng-model="SurveyComment.PositiveComments" не найден');\n  }\n\n  console.log('Готово.');\n})();`;
+
+      document.getElementById('output').value = finalScript;
+      document.getElementById('generated-review').value = normalizedReview;
+
+      const info = document.getElementById('selected-categories-info');
+      if (autoCategories.length > 0) {
+        info.textContent = 'Выбранные категории: ' + autoCategories.join(', ');
+      } else {
+        info.textContent = 'Подходящие категории не найдены. Уточните формулировки или допишите ключевые темы.';
+      }
+    });
+  </script>
+</body>
+</html>
